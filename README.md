@@ -1,5 +1,5 @@
 # ArchUnit - Demo
-#
+
 # Description
 
 This is a simple e-commerce application that demonstrates the architecture testing's ease using [ArchUnit](https://www.archunit.org/).
