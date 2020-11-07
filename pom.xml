@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gotech.achunit.demo</groupId>
+    <artifactId>archunit-demo</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <name>GoTech ArchUnit Demo</name>
+    <description>E-commerce application that demonstrates the architecture testing</description>
+
+    <modules>
+        <module>customer</module>
+        <module>order</module>
+        <module>payment</module>
+        <module>product</module>
+    </modules>
+
+    <properties>
+        <javax.persistence-api.version>2.2</javax.persistence-api.version>
+        <spring-context.version>5.2.10.RELEASE</spring-context.version>
+        <spring-web.version>5.2.10.RELEASE</spring-web.version>
+        <swagger-annotations.version>1.6.2</swagger-annotations.version>
+        <joda-time.version>2.10.8</joda-time.version>
+        <dozer.version>5.5.1</dozer.version>
+        <javax.inject.version>1</javax.inject.version>
+        <slf4j-api.version>1.7.30</slf4j-api.version>
+
+        <archunit-junit4.version>0.14.1</archunit-junit4.version>
+    </properties>
+
+</project>

@@ -1,0 +1,12 @@
+@startuml
+
+[Dao] <<..dao..>> as dao
+[Domain] <<..domain.entity..>> as domain
+[Service] <<..service..>> as service
+[Rest] <<..rest..>> as rest
+
+rest --> service
+service --> dao
+dao --> domain
+
+@enduml
