@@ -25,7 +25,7 @@ public class SliceRules {
     public void noDependenciesBetweenLegacySlices(JavaClasses importedClasses) {
 
         ArchRule rule = slices()
-                .matching("com.demo.order.legacy(*)..")
+                .matching("com.demo.order.(*)..")
                 .should().notDependOnEachOther();
 
         ArchRule frozenRule = freeze(rule);

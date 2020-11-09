@@ -38,7 +38,7 @@ public class ServiceRules {
         ArchRule rule = fields()
                 .that(Predicates.areFeatureFlags())
                 .should().beDeclaredInClassesThat().resideInAPackage("..service..")
-                .because("feature flags are allowed only in services");
+                .because("feature flags are allowed only in services. This should be added as a GeneralCodingRule!");
 
         rule.check(importedClasses);
     }
