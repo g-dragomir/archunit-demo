@@ -1,19 +1,14 @@
-package com.demo.order.archunit;
+package com.demo.order.archunit.rules;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
-import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchIgnore;
 import com.tngtech.archunit.junit.ArchTest;
-import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchRule;
-import org.junit.runner.RunWith;
 
 import static com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.slices;
 import static com.tngtech.archunit.library.freeze.FreezingArchRule.freeze;
 
-@RunWith(ArchUnitRunner.class)
-@AnalyzeClasses(packages = "com.demo.order")
-public class CycleTest {
+public class SliceRules {
 
     @ArchTest
     public void noCyclesInSlices(JavaClasses importedClasses) {
@@ -30,7 +25,7 @@ public class CycleTest {
     public void noDependenciesBetweenLegacySlices(JavaClasses importedClasses) {
 
         ArchRule rule = slices()
-                .matching("com.demo.order.(*)..")
+                .matching("com.demo.order.legacy(*)..")
                 .should().notDependOnEachOther();
 
         ArchRule frozenRule = freeze(rule);

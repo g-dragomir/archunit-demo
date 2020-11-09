@@ -3,6 +3,7 @@ package com.demo.order.rest;
 import com.demo.order.domain.OrderItem;
 import com.demo.order.service.OrderService;
 import io.swagger.annotations.Api;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,11 @@ public class OrderResource {
 
     @Autowired
     private OrderService orderService;
+
+    @RequestMapping(value = "/live", method = RequestMethod.GET)
+    public ResponseEntity live() {
+        return ResponseEntity.ok(DateTime.now().toString());
+    }
 
     @RequestMapping(value = "/{orderId}", method = RequestMethod.GET)
     public ResponseEntity getOrderById(@PathVariable("orderId") int orderId) {

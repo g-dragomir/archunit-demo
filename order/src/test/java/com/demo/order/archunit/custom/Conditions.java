@@ -5,7 +5,7 @@ import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ConditionEvents;
 import com.tngtech.archunit.lang.SimpleConditionEvent;
 
-public class CustomConditions {
+public class Conditions {
 
 	public static ArchCondition<JavaField> haveANameEndingWith(final String suffix) {
 
