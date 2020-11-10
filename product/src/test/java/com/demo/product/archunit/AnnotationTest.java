@@ -1,13 +1,12 @@
 package com.demo.product.archunit;
 
+import com.demo.product.ProductBase;
 import com.tngtech.archunit.core.domain.JavaClasses;
+import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.importer.ImportOption;
-import com.tngtech.archunit.junit.AnalyzeClasses;
-import com.tngtech.archunit.junit.ArchTest;
-import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchRule;
 import io.swagger.annotations.Api;
-import org.junit.runner.RunWith;
+import org.junit.Test;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,12 +15,12 @@ import javax.persistence.Table;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 
-@RunWith(ArchUnitRunner.class)
-@AnalyzeClasses(packages = "com.demo.product", importOptions = {ImportOption.DoNotIncludeTests.class})
 public class AnnotationTest {
 
-    @ArchTest
-    public void entitiesShouldBeAnnotatedWithEntityAndTable(JavaClasses importedClasses) {
+    @Test
+    public void entitiesShouldBeAnnotatedWithEntityAndTable() {
+
+        JavaClasses importedClasses = new ClassFileImporter().importPackages("com.demo.product");
 
         ArchRule rule = classes().that().resideInAPackage("..entity..")
                 .should().beAnnotatedWith(Entity.class)
@@ -30,8 +29,12 @@ public class AnnotationTest {
         rule.check(importedClasses);
     }
 
-    @ArchTest
-    public void allTheClassesFromCoreShouldBeDeprecated(JavaClasses importedClasses) {
+    @Test
+    public void allTheClassesFromCoreShouldBeDeprecated() {
+
+        JavaClasses importedClasses = new ClassFileImporter()
+                .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
+                .importPackages("com.demo.product");
 
         ArchRule rule = classes().that().resideInAPackage("..core..")
                 .should().beAnnotatedWith(Deprecated.class)
@@ -40,8 +43,12 @@ public class AnnotationTest {
         rule.check(importedClasses);
     }
 
-    @ArchTest
-    public void controllersShouldUseSpringWeb(JavaClasses importedClasses) {
+    @Test
+    public void controllersShouldUseSpringWeb() {
+
+        JavaClasses importedClasses = new ClassFileImporter()
+                .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
+                .importPackages("com.demo.product");
 
         ArchRule rule = classes().that().resideInAPackage("..rest..")
                 .should().beAnnotatedWith(RestController.class)
@@ -51,8 +58,12 @@ public class AnnotationTest {
         rule.check(importedClasses);
     }
 
-    @ArchTest
-    public void controllersShouldHaveSwaggerDocumentation(JavaClasses importedClasses) {
+    @Test
+    public void controllersShouldHaveSwaggerDocumentation() {
+
+        JavaClasses importedClasses = new ClassFileImporter()
+                .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
+                .importPackagesOf(ProductBase.class);
 
         ArchRule rule = classes().that().resideInAPackage("..rest..")
                 .should().beAnnotatedWith(Api.class)
