@@ -5,7 +5,7 @@ import com.tngtech.archunit.core.domain.JavaField;
 
 import javax.inject.Inject;
 
-public class CustomPredicates {
+public class Predicates {
 
 	public static DescribedPredicate<JavaField> areFeatureFlags() {
 

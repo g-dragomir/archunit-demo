@@ -1,22 +1,14 @@
-package com.demo.customer.archunit;
+package com.demo.customer.archunit.rules;
 
-import com.tngtech.archunit.core.domain.JavaClasses;
-import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
-import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchRule;
-import org.junit.runner.RunWith;
 
 import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 
-@RunWith(ArchUnitRunner.class)
-@AnalyzeClasses(packages = "com.demo.customer")
-public class LayerTest {
+public class LayeredArchitectureRules {
 
     @ArchTest
-    public void layeredArchitectureForCustomerModule(JavaClasses importedClasses) {
-
-        ArchRule rule = layeredArchitecture()
+    public static final ArchRule  LAYERED_ARCHITECTURE_FOR_CUSTOMER_MODULE = layeredArchitecture()
                 .layer("Controller").definedBy("..rest..")
                 .layer("Service").definedBy("..service..")
                 .layer("DataAccessObject").definedBy("..dao..")
@@ -24,7 +16,4 @@ public class LayerTest {
                 .whereLayer("Controller").mayNotBeAccessedByAnyLayer()
                 .whereLayer("Service").mayOnlyBeAccessedByLayers("Controller")
                 .whereLayer("DataAccessObject").mayOnlyBeAccessedByLayers("Service");
-
-        rule.check(importedClasses);
-    }
 }

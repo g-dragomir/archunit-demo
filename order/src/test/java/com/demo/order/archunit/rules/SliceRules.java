@@ -22,7 +22,7 @@ public class SliceRules {
 
     @ArchTest
     @ArchIgnore
-    public void noDependenciesBetweenLegacySlices(JavaClasses importedClasses) {
+    public void noDependenciesBetweenSlices(JavaClasses importedClasses) {
 
         ArchRule rule = slices()
                 .matching("com.demo.order.(*)..")

@@ -1,32 +1,22 @@
-package com.demo.customer.archunit;
+package com.demo.customer.archunit.rules;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
-import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
-import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchRule;
-import org.junit.runner.RunWith;
 
 import static com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.slices;
 import static com.tngtech.archunit.library.freeze.FreezingArchRule.freeze;
 
-@RunWith(ArchUnitRunner.class)
-@AnalyzeClasses(packages = "com.demo.customer")
-public class CycleTest {
+public class SliceRules {
 
     @ArchTest
-    public void noCyclesInSlices(JavaClasses importedClasses) {
-
-        ArchRule rule = slices()
+    public static final ArchRule NO_CYCLES_IN_SLICES = slices()
                 .matching("com.demo.customer.(*)..")
                 .should().beFreeOfCycles();
 
-        rule.check(importedClasses);
-    }
-
     @ArchTest
 //    @ArchIgnore
-    public void noDependenciesBetweenLegacySlices(JavaClasses importedClasses) {
+    public void noDependenciesBetweenSlices(JavaClasses importedClasses) {
 
         ArchRule rule = slices()
                 .matching("com.demo.customer.(*)..")
